@@ -1,0 +1,8 @@
+name: lstenv
+channels:
+  - default
+  - conda-forge
+dependencies:
+  - lstchain
+  - lstmcpipe
+  
