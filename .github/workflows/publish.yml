@@ -3,18 +3,19 @@ name: publish
 on: [push]
 
 jobs:
-publish-docker:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build docker image
-      run: |
-            docker build . --tag ghcr.io/cta-observatory/lstdock:latest
-            docker run ghcr.io/cta-observatory/lstdock:latest
-            docker push ghcr.io/cta-observatory/lstdock:latest
+  publish-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build docker image
+        run: |
+              docker build . --tag ghcr.io/cta-observatory/lstdock:latest
+              docker run ghcr.io/cta-observatory/lstdock:latest
+              docker push ghcr.io/cta-observatory/lstdock:latest
